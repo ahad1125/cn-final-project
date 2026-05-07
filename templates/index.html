@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Fingerprint Analyzer</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="glass-container">
+        <header>
+            <h1>Network Fingerprint Analyzer</h1>
+            <p>Analyze and classify web traffic behavior</p>
+        </header>
+
+        <main>
+            <div class="controls">
+                <div class="input-group">
+                    <label for="url1">Target URL</label>
+                    <input type="text" id="url1" placeholder="https://example.com" class="url-input">
+                    <span class="error-msg" id="error1"></span>
+                </div>
+                
+                <div class="input-group compare-group" id="compareGroup" style="display: none;">
+                    <label for="url2">Compare With (Optional)</label>
+                    <input type="text" id="url2" placeholder="https://another.com" class="url-input">
+                    <span class="error-msg" id="error2"></span>
+                </div>
+
+                <div class="actions">
+                    <button id="toggleCompareBtn" class="secondary-btn">Toggle Compare Mode</button>
+                    <button id="analyzeBtn" class="primary-btn">Start Capture</button>
+                </div>
+            </div>
+
+            <div id="loadingIndicator" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Capturing traffic... This will take ~10 seconds.</p>
+            </div>
+
+            <div id="resultsContainer" class="results-grid" style="display: none;">
+                <!-- Result 1 -->
+                <div class="result-card" id="resultCard1">
+                    <h2>Site 1 Fingerprint</h2>
+                    <div class="stats" id="stats1"></div>
+                    <div class="charts">
+                        <div class="chart-wrapper">
+                            <canvas id="protocolPieChart1"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="packetSizeHist1"></canvas>
+                        </div>
+                        <div class="chart-wrapper full-width">
+                            <canvas id="trafficTimeline1"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result 2 (Compare Mode) -->
+                <div class="result-card" id="resultCard2" style="display: none;">
+                    <h2>Site 2 Fingerprint</h2>
+                    <div class="stats" id="stats2"></div>
+                    <div class="charts">
+                        <div class="chart-wrapper">
+                            <canvas id="protocolPieChart2"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="packetSizeHist2"></canvas>
+                        </div>
+                        <div class="chart-wrapper full-width">
+                            <canvas id="trafficTimeline2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="compareTimelineContainer" class="result-card" style="display: none; margin-top: 2rem;">
+                <h2>Comparison Traffic Timeline</h2>
+                <div class="chart-wrapper full-width">
+                    <canvas id="compareTimelineChart"></canvas>
+                </div>
+            </div>
+            
+            <div id="diffAlert" class="diff-alert" style="display:none; margin-top: 2rem;"></div>
+        </main>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
